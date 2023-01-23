@@ -1,6 +1,6 @@
 {
   "name": "github-actions-test",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "GitHub Actions Test",
   "repository": {
     "type": "git",
