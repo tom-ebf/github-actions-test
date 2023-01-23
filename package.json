@@ -1,7 +1,6 @@
 {
   "name": "@tom-ebf/github-actions-test",
   "version": "0.0.1",
-  "private": true,
   "description": "GitHub Actions Test",
   "repository": {
     "type": "git",
