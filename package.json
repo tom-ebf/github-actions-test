@@ -1,5 +1,5 @@
 {
-  "name": "@tom-ebf/github-actions-test",
+  "name": "github-actions-test",
   "version": "0.0.2",
   "description": "GitHub Actions Test",
   "repository": {
