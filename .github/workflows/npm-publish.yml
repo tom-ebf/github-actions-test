@@ -8,25 +8,35 @@ on:
     types: [created]
 
 jobs:
-  publish-gpr:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-          registry-url: https://npm.pkg.github.com/
-      - run: npm publish
+      - run: npm ci --no-audit
+  
+  ember-version:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm run version
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
   
-  publish-ghp:
+  ember-build:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-      - run: npm ci --no-audit && npm run deploy
+      - run: npm run build
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
