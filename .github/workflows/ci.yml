@@ -45,3 +45,18 @@ jobs:
         run: npm ci
       - name: Run Tests
         run: npm test
+
+  deploy:
+      name: "Ember Deploy"
+      runs-on: ubuntu-latest
+      timeout-minutes: 10
+
+      steps:
+        - uses: actions/checkout@v3
+        - uses: actions/setup-node@v3
+          with:
+            node-version: 18
+        - run: npm ci --no-audit && npm run deploy
+          env:
+            NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+            DEPLOY_KEY: ${{secrets.DEPLOY_KEY}}
