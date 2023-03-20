@@ -1,0 +1,24 @@
+name: Ember Deploy
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+concurrency:
+  group: ci-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm ci --no-audit && npm run deploy
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          DEPLOY_KEY: ${{secrets.DEPLOY_KEY}}
